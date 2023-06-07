@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React,{useState} from "react";
+import AddUser from "./components/Users/AddUser";
+import UserList from "./components/Users/UsersList";
 function App() {
+//  const  userData=[{
+//   id:"1",name:"usama", age:25
+//  }]
+
+const [userData, setUserData] =useState([]);
+// uname is getting value from enteredUserName and assgning it to name:
+// uage is getting value from enteredAge and assigning it to age
+const addUserData =(uname,uage)=>{
+  setUserData ((prevUserList) =>{
+    // uname is the name entered by the user and it renders
+    // into the userlist component user.name
+    return [...prevUserList ,{name:uname,age:uage,id:Math.random().toString() }];
+  })
+};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <AddUser onAddUser={addUserData}/>
+      <UserList users={userData}/>
+
     </div>
   );
 }
